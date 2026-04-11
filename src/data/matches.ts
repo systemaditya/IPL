@@ -12,7 +12,7 @@ export const matches: Match[] = [
   { id: "M9",  matchNumber: 9,  teamA: "RR",   teamB: "GT",  winner: "RR",  status: "completed" },
   { id: "M10", matchNumber: 10, teamA: "SRH",  teamB: "LSG", winner: "LSG", status: "completed" },
   { id: "M11", matchNumber: 11, teamA: "CSK",  teamB: "RCB", winner: "RCB", status: "completed" },
-  { id: "M12", matchNumber: 12, teamA: "SRH",  teamB: "RCB", winner: null,  status: "abandoned", carryOverToMatchId: "M13" },
+  { id: "M12", matchNumber: 12, teamA: "KKR",  teamB: "PBKS", winner: null,  status: "abandoned", carryOverToMatchId: "M13" },
   { id: "M13", matchNumber: 13, teamA: "MI",   teamB: "RR",  winner: "RR",  status: "completed" },
   { id: "M14", matchNumber: 14, teamA: "DC",   teamB: "GT",  winner: "GT",  status: "completed" },
   { id: "M15", matchNumber: 15, teamA: "LSG",  teamB: "KKR", winner: "LSG", status: "completed" },
