@@ -1,34 +1,25 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig } from 'vite';
 
-// [https://vite.dev/config/](https://vite.dev/config/)
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, '.', '');
+// https://vite.dev/config/
+export default defineConfig({
+  base: '/IPL/', // IMPORTANT for GitHub Pages repo named IPL
 
-  return {
-    base: '/IPL/', // IMPORTANT for GitHub Pages repo named IPL
+  plugins: [react(), tailwindcss()],
 
-    plugins: [react(), tailwindcss()],
+  // No Google AI / Gemini env wiring anymore
+  // define: { 'process.env.GEMINI_API_KEY': ... } removed
 
-    define: {
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, '.'),
     },
+  },
 
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '.'),
-      },
-    },
-
-    server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modify—file watching is disabled to prevent flickering during agent edits.
-      hmr: process.env.DISABLE_HMR !== 'true',
-    },
-  };
+  server: {
+    // HMR toggle as before
+    hmr: process.env.DISABLE_HMR !== 'true',
+  },
 });
-
-
-above is the vite config, could you please change and share
