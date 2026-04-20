@@ -1,4 +1,4 @@
-name: Deploy static site to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -29,12 +29,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build
         run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: List dist output (debug)
+        run: ls -la dist/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -42,7 +48,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload the Vite build output
           path: './dist'
 
       - name: Deploy to GitHub Pages
