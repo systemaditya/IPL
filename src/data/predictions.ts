@@ -160,4 +160,134 @@ export const predictions: PlayerPrediction[] = [
   { matchId: "M16", matchNumber: 16, playerName: "Uma",       predictedTeam: "RR" },
   { matchId: "M16", matchNumber: 16, playerName: "Vinay",     predictedTeam: "RR" },
   { matchId: "M16", matchNumber: 16, playerName: "Yash",      predictedTeam: "RR" },
+
+   // Match 17
+  { matchId: "M17", matchNumber: 17, playerName: "Aditya",    predictedTeam: "SRH" },
+  { matchId: "M17", matchNumber: 17, playerName: "Bhargav",   predictedTeam: "SRH" },
+  { matchId: "M17", matchNumber: 17, playerName: "Harsha",    predictedTeam: "SRH" },
+  { matchId: "M17", matchNumber: 17, playerName: "Kartikeya", predictedTeam: "PBKS" },
+  { matchId: "M17", matchNumber: 17, playerName: "Pursh",     predictedTeam: "SRH" },
+  { matchId: "M17", matchNumber: 17, playerName: "Uma",       predictedTeam: "PBKS" },
+  { matchId: "M17", matchNumber: 17, playerName: "Vinay",     predictedTeam: "PBKS" },
+  { matchId: "M17", matchNumber: 17, playerName: "Yash",      predictedTeam: "PBKS" },
+
+  // Match 18
+  { matchId: "M18", matchNumber: 18, playerName: "Aditya",    predictedTeam: "DC" },
+  { matchId: "M18", matchNumber: 18, playerName: "Bhargav",   predictedTeam: "DC" },
+  { matchId: "M18", matchNumber: 18, playerName: "Harsha",    predictedTeam: "CSK" },
+  { matchId: "M18", matchNumber: 18, playerName: "Kartikeya", predictedTeam: "DC" },
+  { matchId: "M18", matchNumber: 18, playerName: "Pursh",     predictedTeam: "CSK" },
+  { matchId: "M18", matchNumber: 18, playerName: "Uma",       predictedTeam: "CSK" },
+  { matchId: "M18", matchNumber: 18, playerName: "Vinay",     predictedTeam: "CSK" },
+  { matchId: "M18", matchNumber: 18, playerName: "Yash",      predictedTeam: "CSK" },
+
+  // Match 19
+  { matchId: "M19", matchNumber: 19, playerName: "Aditya",    predictedTeam: "LSG" },
+  { matchId: "M19", matchNumber: 19, playerName: "Bhargav",   predictedTeam: "GT" },
+  { matchId: "M19", matchNumber: 19, playerName: "Harsha",    predictedTeam: "GT" },
+  { matchId: "M19", matchNumber: 19, playerName: "Kartikeya", predictedTeam: "GT" },
+  { matchId: "M19", matchNumber: 19, playerName: "Pursh",     predictedTeam: "GT" },
+  { matchId: "M19", matchNumber: 19, playerName: "Uma",       predictedTeam: "LSG" },
+  { matchId: "M19", matchNumber: 19, playerName: "Vinay",     predictedTeam: "LSG" },
+  { matchId: "M19", matchNumber: 19, playerName: "Yash",      predictedTeam: "LSG" },
+
+  // Match 20
+  { matchId: "M20", matchNumber: 20, playerName: "Aditya",    predictedTeam: "MI" },
+  { matchId: "M20", matchNumber: 20, playerName: "Bhargav",   predictedTeam: "RCB" },
+  { matchId: "M20", matchNumber: 20, playerName: "Harsha",    predictedTeam: "RCB" },
+  { matchId: "M20", matchNumber: 20, playerName: "Kartikeya", predictedTeam: "RCB" },
+  { matchId: "M20", matchNumber: 20, playerName: "Pursh",     predictedTeam: "MI" },
+  { matchId: "M20", matchNumber: 20, playerName: "Uma",       predictedTeam: "MI" },
+  { matchId: "M20", matchNumber: 20, playerName: "Vinay",     predictedTeam: "MI" },
+  { matchId: "M20", matchNumber: 20, playerName: "Yash",      predictedTeam: "MI" },
+
+  // Match 21
+  { matchId: "M21", matchNumber: 21, playerName: "Aditya",    predictedTeam: "SRH" },
+  { matchId: "M21", matchNumber: 21, playerName: "Bhargav",   predictedTeam: "RR" },
+  { matchId: "M21", matchNumber: 21, playerName: "Harsha",    predictedTeam: "SRH" },
+  { matchId: "M21", matchNumber: 21, playerName: "Kartikeya", predictedTeam: "RR" },
+  { matchId: "M21", matchNumber: 21, playerName: "Pursh",     predictedTeam: "RR" },
+  { matchId: "M21", matchNumber: 21, playerName: "Uma",       predictedTeam: "SRH" },
+  { matchId: "M21", matchNumber: 21, playerName: "Vinay",     predictedTeam: "RR" },
+  { matchId: "M21", matchNumber: 21, playerName: "Yash",      predictedTeam: "RR" },
+
+  // Match 22
+  { matchId: "M22", matchNumber: 22, playerName: "Aditya",    predictedTeam: "KKR" },
+  { matchId: "M22", matchNumber: 22, playerName: "Bhargav",   predictedTeam: "CSK" },
+  { matchId: "M22", matchNumber: 22, playerName: "Harsha",    predictedTeam: "KKR" },
+  { matchId: "M22", matchNumber: 22, playerName: "Kartikeya", predictedTeam: "CSK" },
+  { matchId: "M22", matchNumber: 22, playerName: "Pursh",     predictedTeam: "KKR" },
+  { matchId: "M22", matchNumber: 22, playerName: "Uma",       predictedTeam: "CSK" },
+  { matchId: "M22", matchNumber: 22, playerName: "Vinay",     predictedTeam: "CSK" },
+  { matchId: "M22", matchNumber: 22, playerName: "Yash",      predictedTeam: "CSK" },
+
+  // Match 23
+  { matchId: "M23", matchNumber: 23, playerName: "Aditya",    predictedTeam: "LSG" },
+  { matchId: "M23", matchNumber: 23, playerName: "Bhargav",   predictedTeam: "RCB" },
+  { matchId: "M23", matchNumber: 23, playerName: "Harsha",    predictedTeam: "LSG" },
+  { matchId: "M23", matchNumber: 23, playerName: "Kartikeya", predictedTeam: "RCB" },
+  { matchId: "M23", matchNumber: 23, playerName: "Pursh",     predictedTeam: "RCB" },
+  { matchId: "M23", matchNumber: 23, playerName: "Uma",       predictedTeam: "RCB" },
+  { matchId: "M23", matchNumber: 23, playerName: "Vinay",     predictedTeam: "RCB" },
+  { matchId: "M23", matchNumber: 23, playerName: "Yash",      predictedTeam: "LSG" },
+
+  // Match 24
+  { matchId: "M24", matchNumber: 24, playerName: "Aditya",    predictedTeam: "PBKS" },
+  { matchId: "M24", matchNumber: 24, playerName: "Bhargav",   predictedTeam: "MI" },
+  { matchId: "M24", matchNumber: 24, playerName: "Harsha",    predictedTeam: "PBKS" },
+  { matchId: "M24", matchNumber: 24, playerName: "Kartikeya", predictedTeam: "PBKS" },
+  { matchId: "M24", matchNumber: 24, playerName: "Pursh",     predictedTeam: "PBKS" },
+  { matchId: "M24", matchNumber: 24, playerName: "Uma",       predictedTeam: "MI" },
+  { matchId: "M24", matchNumber: 24, playerName: "Vinay",     predictedTeam: "PBKS" },
+  { matchId: "M24", matchNumber: 24, playerName: "Yash",      predictedTeam: "MI" },
+
+  // Match 25
+  { matchId: "M25", matchNumber: 25, playerName: "Aditya",    predictedTeam: "KKR" },
+  { matchId: "M25", matchNumber: 25, playerName: "Bhargav",   predictedTeam: "GT" },
+  { matchId: "M25", matchNumber: 25, playerName: "Harsha",    predictedTeam: "KKR" },
+  { matchId: "M25", matchNumber: 25, playerName: "Kartikeya", predictedTeam: "GT" },
+  { matchId: "M25", matchNumber: 25, playerName: "Pursh",     predictedTeam: "KKR" },
+  { matchId: "M25", matchNumber: 25, playerName: "Uma",       predictedTeam: "GT" },
+  { matchId: "M25", matchNumber: 25, playerName: "Vinay",     predictedTeam: "KKR" },
+  { matchId: "M25", matchNumber: 25, playerName: "Yash",      predictedTeam: "GT" },
+
+  // Match 26
+  { matchId: "M26", matchNumber: 26, playerName: "Aditya",    predictedTeam: "DC" },
+  { matchId: "M26", matchNumber: 26, playerName: "Bhargav",   predictedTeam: "RCB" },
+  { matchId: "M26", matchNumber: 26, playerName: "Harsha",    predictedTeam: "RCB" },
+  { matchId: "M26", matchNumber: 26, playerName: "Kartikeya", predictedTeam: "RCB" },
+  { matchId: "M26", matchNumber: 26, playerName: "Pursh",     predictedTeam: "RCB" },
+  { matchId: "M26", matchNumber: 26, playerName: "Uma",       predictedTeam: "DC" },
+  { matchId: "M26", matchNumber: 26, playerName: "Vinay",     predictedTeam: "DC" },
+  { matchId: "M26", matchNumber: 26, playerName: "Yash",      predictedTeam: "RCB" },
+
+  // Match 27
+  { matchId: "M27", matchNumber: 27, playerName: "Aditya",    predictedTeam: "SRH" },
+  { matchId: "M27", matchNumber: 27, playerName: "Bhargav",   predictedTeam: "CSK" },
+  { matchId: "M27", matchNumber: 27, playerName: "Harsha",    predictedTeam: "SRH" },
+  { matchId: "M27", matchNumber: 27, playerName: "Kartikeya", predictedTeam: "SRH" },
+  { matchId: "M27", matchNumber: 27, playerName: "Pursh",     predictedTeam: "SRH" },
+  { matchId: "M27", matchNumber: 27, playerName: "Uma",       predictedTeam: "CSK" },
+  { matchId: "M27", matchNumber: 27, playerName: "Vinay",     predictedTeam: "CSK" },
+  { matchId: "M27", matchNumber: 27, playerName: "Yash",      predictedTeam: "SRH" },
+
+  // Match 28
+  { matchId: "M28", matchNumber: 28, playerName: "Aditya",    predictedTeam: "RR" },
+  { matchId: "M28", matchNumber: 28, playerName: "Bhargav",   predictedTeam: "RR" },
+  { matchId: "M28", matchNumber: 28, playerName: "Harsha",    predictedTeam: "RR" },
+  { matchId: "M28", matchNumber: 28, playerName: "Kartikeya", predictedTeam: "RR" },
+  { matchId: "M28", matchNumber: 28, playerName: "Pursh",     predictedTeam: "KKR" },
+  { matchId: "M28", matchNumber: 28, playerName: "Uma",       predictedTeam: "KKR" },
+  { matchId: "M28", matchNumber: 28, playerName: "Vinay",     predictedTeam: "RR" },
+  { matchId: "M28", matchNumber: 28, playerName: "Yash",      predictedTeam: "RR" },
+
+  // Match 29
+  { matchId: "M29", matchNumber: 29, playerName: "Aditya",    predictedTeam: "PBKS" },
+  { matchId: "M29", matchNumber: 29, playerName: "Bhargav",   predictedTeam: "LSG" },
+  { matchId: "M29", matchNumber: 29, playerName: "Harsha",    predictedTeam: "LSG" },
+  { matchId: "M29", matchNumber: 29, playerName: "Kartikeya", predictedTeam: "PBKS" },
+  { matchId: "M29", matchNumber: 29, playerName: "Pursh",     predictedTeam: "PBKS" },
+  { matchId: "M29", matchNumber: 29, playerName: "Uma",       predictedTeam: "PBKS" },
+  { matchId: "M29", matchNumber: 29, playerName: "Vinay",     predictedTeam: "PBKS" },
+  { matchId: "M29", matchNumber: 29, playerName: "Yash",      predictedTeam: "PBKS" },
 ];
