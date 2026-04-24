@@ -142,4 +142,5 @@ export default function MoneyBoard() {
       </div>
     </div>
   );
+  
 }
