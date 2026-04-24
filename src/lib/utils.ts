@@ -1,13 +1,91 @@
-import { MatchReportRow, PlayerMoneySummary, players, PlayerName, Match, RUPEES_PER_POINT } from "../data/types";
+import { MatchReportRow, PlayerMoneySummary, players, PlayerName, Match, RUPEES_PER_POINT, DateRangeFilter } from "../data/types";
 
-export function calculatePlayerMoney(reports: MatchReportRow[]): PlayerMoneySummary[] {
+const MONTHS: Record<string, number> = {
+  JAN: 0,
+  FEB: 1,
+  MAR: 2,
+  APR: 3,
+  MAY: 4,
+  JUN: 5,
+  JUL: 6,
+  AUG: 7,
+  SEP: 8,
+  OCT: 9,
+  NOV: 10,
+  DEC: 11,
+};
+
+function parseInputDate(value: string): Date {
+  const [year, month, day] = value.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
+export function parseMatchDate(dateStr: string): Date {
+  const [day, month, year] = dateStr.split("-");
+  return new Date(2000 + Number(year), MONTHS[month], Number(day));
+}
+
+export function formatMatchDate(dateStr: string): string {
+  const date = parseMatchDate(dateStr);
+  return date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+}
+
+export function formatDateInputLabel(value?: string): string {
+  if (!value) return "All dates";
+  return parseInputDate(value).toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+}
+
+export function isMatchWithinRange(matchDate: string, range?: DateRangeFilter): boolean {
+  if (!range?.startDate && !range?.endDate) return true;
+
+  const date = parseMatchDate(matchDate);
+  if (range.startDate) {
+    const start = parseInputDate(range.startDate);
+    if (date < start) return false;
+  }
+  if (range.endDate) {
+    const end = parseInputDate(range.endDate);
+    end.setHours(23, 59, 59, 999);
+    if (date > end) return false;
+  }
+  return true;
+}
+
+export function getFilteredMatches(matches: Match[], range?: DateRangeFilter): Match[] {
+  return matches.filter((match) => isMatchWithinRange(match.date, range));
+}
+
+export function calculatePlayerMoney(
+  reports: MatchReportRow[],
+  matches?: Match[],
+  range?: DateRangeFilter
+): PlayerMoneySummary[] {
+  let filteredReports = reports;
+
+  if (matches && matches.length) {
+    const matchMap = new Map(matches.map((match) => [match.id, match]));
+    filteredReports = reports.filter((report) => {
+      const match = matchMap.get(report.matchId);
+      if (!match) return false;
+      return isMatchWithinRange(match.date, range);
+    });
+  }
+
   const summary: Record<PlayerName, { totalPoints: number }> = {} as any;
 
-  players.forEach(name => {
+  players.forEach((name) => {
     summary[name] = { totalPoints: 0 };
   });
 
-  reports.forEach(report => {
+  filteredReports.forEach((report) => {
     Object.entries(report.pointsByPlayer).forEach(([name, points]) => {
       if (summary[name as PlayerName]) {
         summary[name as PlayerName].totalPoints += points;
@@ -15,7 +93,7 @@ export function calculatePlayerMoney(reports: MatchReportRow[]): PlayerMoneySumm
     });
   });
 
-  return players.map(name => ({
+  return players.map((name) => ({
     playerName: name,
     totalPoints: summary[name].totalPoints,
     netRupees: Math.round(summary[name].totalPoints * RUPEES_PER_POINT * 100) / 100,

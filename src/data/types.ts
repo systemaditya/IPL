@@ -18,6 +18,7 @@ export type MatchStatus = "scheduled" | "completed" | "abandoned";
 export interface Match {
   id: string;
   matchNumber: number;
+  date: string;
   teamA: TeamCode;
   teamB: TeamCode;
   winner: TeamCode | null;
@@ -44,6 +45,11 @@ export interface PlayerMoneySummary {
   playerName: PlayerName;
   totalPoints: number;
   netRupees: number;
+}
+
+export interface DateRangeFilter {
+  startDate?: string;
+  endDate?: string;
 }
 
 export const ENTRY_AMOUNT_PER_MATCH = 10;
