@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { matches } from "../data/matches";
 import { matchReports } from "../data/matchReports";
 import { predictions } from "../data/predictions";
@@ -28,7 +28,6 @@ const getLast7DaysRange = () => {
 const getThisWeekRange = () => {
   const today = new Date();
   const day = today.getDay();
-
   const diffToMonday = day === 0 ? -6 : 1 - day;
 
   const monday = new Date(today);
@@ -57,37 +56,41 @@ export default function Matches() {
     <div className="max-w-5xl mx-auto px-4 py-12">
       {/* HEADER */}
       <header className="mb-10">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-secondary/10 border border-brand-secondary/20 text-brand-secondary text-xs font-bold uppercase tracking-widest mb-4">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-300 text-xs font-bold uppercase mb-4">
           <Receipt size={14} />
           Matches
         </div>
 
-        <h1 className="text-5xl font-display font-black mb-4">
+        <h1 className="text-5xl font-black mb-4 text-white">
           Match History
         </h1>
 
-        <p className="text-white/60">
+        <p className="text-gray-400">
           Filter matches based on dates and explore results.
         </p>
       </header>
 
       {/* FILTER CARD */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="mb-8 rounded-3xl border border-white/10 bg-bg-card p-6 shadow-xl"
+        className="mb-8 rounded-3xl p-6 shadow-2xl"
+        style={{
+          background: "linear-gradient(145deg, #0f172a, #020617)",
+          border: "1px solid rgba(255,255,255,0.1)",
+        }}
       >
-        {/* Top row */}
-        <div className="flex justify-between items-center mb-4">
-          <div className="text-sm text-white/60 flex items-center gap-2">
+        {/* TOP BAR */}
+        <div className="flex justify-between items-center mb-5">
+          <div className="text-sm text-gray-400 flex items-center gap-2">
             <Filter size={14} />
             {filteredMatches.length} matches shown
           </div>
 
           <button
             onClick={clearFilters}
-            className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition"
+            className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition"
           >
             <RotateCcw size={14} />
             Reset
@@ -108,21 +111,24 @@ export default function Matches() {
             return (
               <motion.button
                 key={btn.label}
-                whileTap={{ scale: 0.95 }}
-                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.08 }}
                 onClick={() => setRange(btn.fn())}
-                className={`relative px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300
-                ${
-                  isActive
-                    ? "bg-gradient-to-r from-brand-primary to-brand-secondary text-black shadow-lg"
-                    : "bg-white/5 text-white/70 border border-white/10 hover:bg-white/10"
-                }`}
+                className="px-5 py-2 rounded-full font-semibold text-sm transition-all"
+                style={{
+                  background: isActive
+                    ? "linear-gradient(90deg, #22c55e, #3b82f6)"
+                    : "rgba(255,255,255,0.05)",
+                  color: isActive ? "black" : "white",
+                  border: isActive
+                    ? "none"
+                    : "1px solid rgba(255,255,255,0.1)",
+                  boxShadow: isActive
+                    ? "0 0 20px rgba(59,130,246,0.5)"
+                    : "none",
+                }}
               >
                 {btn.label}
-
-                {isActive && (
-                  <span className="absolute inset-0 rounded-full bg-gradient-to-r from-brand-primary to-brand-secondary blur opacity-30 -z-10" />
-                )}
               </motion.button>
             );
           })}
@@ -136,7 +142,11 @@ export default function Matches() {
             onChange={(e) =>
               setRange((p) => ({ ...p, startDate: e.target.value }))
             }
-            className="bg-black/30 border border-white/10 p-3 rounded-xl text-white focus:ring-2 focus:ring-brand-primary transition-all"
+            className="p-3 rounded-xl text-white"
+            style={{
+              background: "#020617",
+              border: "1px solid rgba(255,255,255,0.1)",
+            }}
           />
 
           <input
@@ -145,19 +155,29 @@ export default function Matches() {
             onChange={(e) =>
               setRange((p) => ({ ...p, endDate: e.target.value }))
             }
-            className="bg-black/30 border border-white/10 p-3 rounded-xl text-white focus:ring-2 focus:ring-brand-primary transition-all"
+            className="p-3 rounded-xl text-white"
+            style={{
+              background: "#020617",
+              border: "1px solid rgba(255,255,255,0.1)",
+            }}
           />
         </div>
 
-        {/* ACTIVE FILTER BADGE */}
+        {/* ACTIVE RANGE */}
         <div className="mt-4">
           {range.startDate || range.endDate ? (
-            <span className="px-3 py-1 rounded-full bg-brand-primary/20 text-brand-primary text-xs font-semibold">
+            <span
+              className="px-3 py-1 rounded-full text-xs font-semibold"
+              style={{
+                background: "rgba(34,197,94,0.2)",
+                color: "#22c55e",
+              }}
+            >
               {formatDateInputLabel(range.startDate)} →{" "}
               {formatDateInputLabel(range.endDate)}
             </span>
           ) : (
-            <span className="text-xs text-white/40">
+            <span className="text-xs text-gray-500">
               No filter applied
             </span>
           )}
@@ -173,12 +193,18 @@ export default function Matches() {
           );
 
           return (
-            <MatchCard
+            <motion.div
               key={match.id}
-              match={match}
-              report={report}
-              predictions={matchPredictions}
-            />
+              layout
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <MatchCard
+                match={match}
+                report={report}
+                predictions={matchPredictions}
+              />
+            </motion.div>
           );
         })}
       </motion.div>
