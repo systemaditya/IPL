@@ -72,7 +72,13 @@ export default function Matches() {
       </header>
 
       {/* FILTER CARD */}
-      <div className="mb-8 rounded-3xl border border-white/10 bg-bg-card p-6">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="mb-8 rounded-3xl border border-white/10 bg-bg-card p-6 shadow-xl"
+      >
+        {/* Top row */}
         <div className="flex justify-between items-center mb-4">
           <div className="text-sm text-white/60 flex items-center gap-2">
             <Filter size={14} />
@@ -81,21 +87,48 @@ export default function Matches() {
 
           <button
             onClick={clearFilters}
-            className="flex items-center gap-2 text-sm text-white/70 hover:text-white"
+            className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition"
           >
             <RotateCcw size={14} />
             Reset
           </button>
         </div>
 
-        {/* QUICK FILTER BUTTONS */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          <button onClick={() => setRange(getTodayRange())} className="filter-btn">Today</button>
-          <button onClick={() => setRange(getLast7DaysRange())} className="filter-btn">Last 7 Days</button>
-          <button onClick={() => setRange(getThisWeekRange())} className="filter-btn">This Week</button>
+        {/* FILTER BUTTONS */}
+        <div className="flex flex-wrap gap-3 mb-5">
+          {[
+            { label: "Today", fn: getTodayRange },
+            { label: "Last 7 Days", fn: getLast7DaysRange },
+            { label: "This Week", fn: getThisWeekRange },
+          ].map((btn) => {
+            const isActive =
+              range.startDate === btn.fn().startDate &&
+              range.endDate === btn.fn().endDate;
+
+            return (
+              <motion.button
+                key={btn.label}
+                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05 }}
+                onClick={() => setRange(btn.fn())}
+                className={`relative px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300
+                ${
+                  isActive
+                    ? "bg-gradient-to-r from-brand-primary to-brand-secondary text-black shadow-lg"
+                    : "bg-white/5 text-white/70 border border-white/10 hover:bg-white/10"
+                }`}
+              >
+                {btn.label}
+
+                {isActive && (
+                  <span className="absolute inset-0 rounded-full bg-gradient-to-r from-brand-primary to-brand-secondary blur opacity-30 -z-10" />
+                )}
+              </motion.button>
+            );
+          })}
         </div>
 
-        {/* DATE PICKERS */}
+        {/* DATE INPUTS */}
         <div className="grid md:grid-cols-2 gap-4">
           <input
             type="date"
@@ -103,7 +136,7 @@ export default function Matches() {
             onChange={(e) =>
               setRange((p) => ({ ...p, startDate: e.target.value }))
             }
-            className="date-input"
+            className="bg-black/30 border border-white/10 p-3 rounded-xl text-white focus:ring-2 focus:ring-brand-primary transition-all"
           />
 
           <input
@@ -112,19 +145,27 @@ export default function Matches() {
             onChange={(e) =>
               setRange((p) => ({ ...p, endDate: e.target.value }))
             }
-            className="date-input"
+            className="bg-black/30 border border-white/10 p-3 rounded-xl text-white focus:ring-2 focus:ring-brand-primary transition-all"
           />
         </div>
 
-        <div className="text-xs text-white/40 mt-2">
-          {range.startDate || range.endDate
-            ? `${formatDateInputLabel(range.startDate)} → ${formatDateInputLabel(range.endDate)}`
-            : "No filter applied"}
+        {/* ACTIVE FILTER BADGE */}
+        <div className="mt-4">
+          {range.startDate || range.endDate ? (
+            <span className="px-3 py-1 rounded-full bg-brand-primary/20 text-brand-primary text-xs font-semibold">
+              {formatDateInputLabel(range.startDate)} →{" "}
+              {formatDateInputLabel(range.endDate)}
+            </span>
+          ) : (
+            <span className="text-xs text-white/40">
+              No filter applied
+            </span>
+          )}
         </div>
-      </div>
+      </motion.div>
 
       {/* MATCH LIST */}
-      <div className="space-y-6">
+      <motion.div layout className="space-y-6">
         {filteredMatches.map((match) => {
           const report = matchReports.find((r) => r.matchId === match.id);
           const matchPredictions = predictions.filter(
@@ -140,8 +181,7 @@ export default function Matches() {
             />
           );
         })}
-      </div>
+      </motion.div>
     </div>
   );
-  
 }
