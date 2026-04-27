@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 
 export default function Dashboard() {
   const summaries = calculatePlayerMoney(matchReports);
-  const completedMatches = matches.filter(m => m.status === "completed").length;
-  
-  const allPoints = matchReports.flatMap(r => Object.values(r.pointsByPlayer));
+  const completedMatches = matches.filter((m) => m.status === "completed").length;
+
+  const allPoints = matchReports.flatMap((r) => Object.values(r.pointsByPlayer));
   const totalPointsMoved = allPoints.reduce((acc, p) => acc + Math.abs(p), 0);
   const biggestWin = Math.max(...allPoints);
   const biggestLoss = Math.min(...allPoints);
@@ -22,27 +22,27 @@ export default function Dashboard() {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const item = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
+    show: { opacity: 1, y: 0 },
   };
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <header className="mb-12">
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           className="text-5xl md:text-7xl font-display font-black uppercase tracking-tighter mb-4"
         >
           10 Rupayalu <span className="text-brand-primary">Aatagalu</span>
         </motion.h1>
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
@@ -52,7 +52,7 @@ export default function Dashboard() {
         </motion.p>
       </header>
 
-      <motion.div 
+      <motion.div
         variants={container}
         initial="hidden"
         animate="show"
@@ -92,14 +92,16 @@ export default function Dashboard() {
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4 }}
           className="lg:col-span-2 bg-brand-primary p-8 rounded-[2.5rem] text-black relative overflow-hidden group"
         >
           <div className="relative z-10">
-            <div className="text-[10px] uppercase font-black tracking-[0.2em] mb-2 opacity-60">Group Consensus</div>
+            <div className="text-[10px] uppercase font-black tracking-[0.2em] mb-2 opacity-60">
+              Group Consensus
+            </div>
             <h2 className="text-4xl md:text-5xl font-display font-black leading-none mb-6">
               "{overallRoast}"
             </h2>
@@ -126,7 +128,7 @@ export default function Dashboard() {
           </div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.5 }}
