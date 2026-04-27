@@ -15,7 +15,7 @@ export default function App() {
       <Navbar />
       <main className="flex-1">
         <AnimatePresence mode="wait">
-          <Routes location={location}>
+          <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/money" element={<MoneyBoard />} />
             <Route path="/matches" element={<Matches />} />
