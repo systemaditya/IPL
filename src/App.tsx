@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Settlement from "./pages/Settlement";
 import Dashboard from "./pages/Dashboard";
 import MoneyBoard from "./pages/MoneyBoard";
 import Matches from "./pages/Matches";
@@ -18,6 +19,7 @@ export default function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/money" element={<MoneyBoard />} />
             <Route path="/matches" element={<Matches />} />
+            <Route path="/settlement" element={<Settlement />} />
             <Route path="/rules" element={<Rules />} />
           </Routes>
         </AnimatePresence>
