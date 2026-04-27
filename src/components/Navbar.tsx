@@ -1,11 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "motion/react";
-import { Trophy, LayoutDashboard, Receipt, BookOpen } from "lucide-react";
+import { Trophy, LayoutDashboard, Receipt, BookOpen, Scale } from "lucide-react";
 
 const navItems = [
   { name: "Dashboard", path: "/", icon: LayoutDashboard },
   { name: "Money Board", path: "/money", icon: Trophy },
   { name: "Matches", path: "/matches", icon: Receipt },
+  { name: "Settlement", path: "/settlement", icon: Scale },
   { name: "Rules", path: "/rules", icon: BookOpen },
 ];
 
@@ -28,6 +29,7 @@ export default function Navbar() {
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             const Icon = item.icon;
+
             return (
               <Link
                 key={item.path}
