@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { matchReports } from "../data/matchReports";
 import { matches } from "../data/matches";
 import { calculatePlayerMoney, getOverallRoast, getPlayerRoast } from "../lib/utils";
-import { TrendingUp, TrendingDown, Activity, DollarSign, ArrowRight } from "lucide-react";
+import { TrendingUp, TrendingDown, Activity, DollarSign, ArrowRight, Scale } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
@@ -103,10 +103,24 @@ export default function Dashboard() {
             <h2 className="text-4xl md:text-5xl font-display font-black leading-none mb-6">
               "{overallRoast}"
             </h2>
-            <Link to="/matches" className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform">
-              View Chaos Log <ArrowRight size={16} />
-            </Link>
+
+            <div className="flex flex-wrap gap-3">
+              <Link
+                to="/matches"
+                className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform"
+              >
+                View Chaos Log <ArrowRight size={16} />
+              </Link>
+
+              <Link
+                to="/settlement"
+                className="inline-flex items-center gap-2 bg-white/20 text-black px-6 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform border border-black/10"
+              >
+                View Settlement <Scale size={16} />
+              </Link>
+            </div>
           </div>
+
           <div className="absolute -right-10 -bottom-10 opacity-10 group-hover:scale-110 transition-transform duration-700">
             <Activity size={300} />
           </div>
@@ -120,19 +134,26 @@ export default function Dashboard() {
         >
           <h3 className="text-xl font-display font-bold mb-6 flex items-center justify-between">
             Top Performers
-            <Link to="/money" className="text-xs text-brand-primary hover:underline">View All</Link>
+            <Link to="/money" className="text-xs text-brand-primary hover:underline">
+              View All
+            </Link>
           </h3>
+
           <div className="space-y-6">
             {top3.map((player, idx) => (
               <div key={player.playerName} className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center font-display font-black text-white/20">
                   0{idx + 1}
                 </div>
+
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="font-bold">{player.playerName}</span>
-                    <span className="text-xs font-mono text-green-400">₹{player.netRupees.toFixed(2)}</span>
+                    <span className="text-xs font-mono text-green-400">
+                      ₹{player.netRupees.toFixed(2)}
+                    </span>
                   </div>
+
                   <p className="text-xs text-white/40 italic mt-1 leading-relaxed">
                     "{getPlayerRoast(player)}"
                   </p>
