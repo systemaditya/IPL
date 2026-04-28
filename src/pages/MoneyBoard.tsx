@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { Trophy, RotateCcw, Filter } from "lucide-react";
 import { matchReports } from "../data/matchReports";
 import { matches } from "../data/matches";
@@ -30,7 +30,6 @@ const getLast7DaysRange = () => {
 const getThisWeekRange = () => {
   const today = new Date();
   const day = today.getDay();
-
   const diffToMonday = day === 0 ? -6 : 1 - day;
 
   const monday = new Date(today);
@@ -69,36 +68,81 @@ export default function MoneyBoard() {
           Money Board
         </div>
 
-        <h1 className="text-5xl font-display font-black mb-4">
+        <h1 className="text-5xl font-display font-black mb-4 text-white">
           Leaderboard
         </h1>
+
+        <p className="text-gray-400">
+          Filter matches by date to calculate leaderboard money for a specific period.
+        </p>
       </header>
 
-      {/* FILTER */}
-      <div className="mb-8 rounded-3xl border border-white/10 bg-bg-card p-6">
-        <div className="flex justify-between items-center mb-4">
-          <div className="text-sm text-white/60 flex items-center gap-2">
+      {/* FILTER CARD */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="mb-8 rounded-3xl p-6 shadow-2xl"
+        style={{
+          background: "linear-gradient(145deg, #0f172a, #020617)",
+          border: "1px solid rgba(255,255,255,0.1)",
+        }}
+      >
+        {/* TOP BAR */}
+        <div className="flex justify-between items-center mb-5">
+          <div className="text-sm text-gray-400 flex items-center gap-2">
             <Filter size={14} />
             {filteredMatches.length} matches used
           </div>
 
           <button
             onClick={clearFilters}
-            className="flex items-center gap-2 text-sm text-white/70 hover:text-white"
+            className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition"
           >
             <RotateCcw size={14} />
             Reset
           </button>
         </div>
 
-        {/* BUTTONS */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          <button onClick={() => setRange(getTodayRange())} className="filter-btn">Today</button>
-          <button onClick={() => setRange(getLast7DaysRange())} className="filter-btn">Last 7 Days</button>
-          <button onClick={() => setRange(getThisWeekRange())} className="filter-btn">This Week</button>
+        {/* FILTER BUTTONS */}
+        <div className="flex flex-wrap gap-3 mb-5">
+          {[
+            { label: "Today", fn: getTodayRange },
+            { label: "Last 7 Days", fn: getLast7DaysRange },
+            { label: "This Week", fn: getThisWeekRange },
+          ].map((btn) => {
+            const currentRange = btn.fn();
+            const isActive =
+              range.startDate === currentRange.startDate &&
+              range.endDate === currentRange.endDate;
+
+            return (
+              <motion.button
+                key={btn.label}
+                whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.08 }}
+                onClick={() => setRange(currentRange)}
+                className="px-5 py-2 rounded-full font-semibold text-sm transition-all"
+                style={{
+                  background: isActive
+                    ? "linear-gradient(90deg, #22c55e, #3b82f6)"
+                    : "rgba(255,255,255,0.05)",
+                  color: isActive ? "black" : "white",
+                  border: isActive
+                    ? "none"
+                    : "1px solid rgba(255,255,255,0.1)",
+                  boxShadow: isActive
+                    ? "0 0 20px rgba(59,130,246,0.5)"
+                    : "none",
+                }}
+              >
+                {btn.label}
+              </motion.button>
+            );
+          })}
         </div>
 
-        {/* DATE INPUT */}
+        {/* DATE INPUTS */}
         <div className="grid md:grid-cols-2 gap-4">
           <input
             type="date"
@@ -106,7 +150,11 @@ export default function MoneyBoard() {
             onChange={(e) =>
               setRange((p) => ({ ...p, startDate: e.target.value }))
             }
-            className="date-input"
+            className="p-3 rounded-xl text-white"
+            style={{
+              background: "#020617",
+              border: "1px solid rgba(255,255,255,0.1)",
+            }}
           />
 
           <input
@@ -115,16 +163,34 @@ export default function MoneyBoard() {
             onChange={(e) =>
               setRange((p) => ({ ...p, endDate: e.target.value }))
             }
-            className="date-input"
+            className="p-3 rounded-xl text-white"
+            style={{
+              background: "#020617",
+              border: "1px solid rgba(255,255,255,0.1)",
+            }}
           />
         </div>
 
-        <div className="text-xs text-white/40 mt-2">
-          {range.startDate || range.endDate
-            ? `${formatDateInputLabel(range.startDate)} → ${formatDateInputLabel(range.endDate)}`
-            : "No filter applied"}
+        {/* ACTIVE RANGE */}
+        <div className="mt-4">
+          {range.startDate || range.endDate ? (
+            <span
+              className="px-3 py-1 rounded-full text-xs font-semibold"
+              style={{
+                background: "rgba(34,197,94,0.2)",
+                color: "#22c55e",
+              }}
+            >
+              {formatDateInputLabel(range.startDate)} →{" "}
+              {formatDateInputLabel(range.endDate)}
+            </span>
+          ) : (
+            <span className="text-xs text-gray-500">
+              No filter applied
+            </span>
+          )}
         </div>
-      </div>
+      </motion.div>
 
       {/* LEADERBOARD */}
       <div className="space-y-3">
@@ -133,14 +199,13 @@ export default function MoneyBoard() {
             key={p.playerName}
             className="flex justify-between items-center bg-bg-card p-4 rounded-xl border border-white/5"
           >
-            <span className="font-bold">
+            <span className="font-bold text-white">
               {i + 1}. {p.playerName}
             </span>
-            <span className="font-mono">₹ {p.netRupees}</span>
+            <span className="font-mono text-white">₹ {p.netRupees}</span>
           </div>
         ))}
       </div>
     </div>
   );
-  
 }
