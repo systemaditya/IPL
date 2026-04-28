@@ -8,7 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "encrypt": "staticrypt dist/index.html --short -d dist",
+    "build:prod": "vite build && npm run encrypt"
   },
   "dependencies": {
     "@google/genai": "^1.29.0",
@@ -33,13 +35,4 @@
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }
-  "scripts": {
-  "dev": "vite --port=3000 --host=0.0.0.0",
-  "build": "vite build",
-  "preview": "vite preview",
-  "clean": "rm -rf dist",
-  "lint": "tsc --noEmit",
-  "encrypt": "staticrypt dist/index.html --short -d dist",
-  "build:prod": "vite build && npm run encrypt"
-}
 }
