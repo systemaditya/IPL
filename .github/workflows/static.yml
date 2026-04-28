@@ -39,6 +39,9 @@ jobs:
         env:
           NODE_ENV: production
 
+      - name: Encrypt with StatiCrypt
+        run: npx staticrypt dist/index.html --short -d dist -p "${{ secrets.SITE_PASSWORD }}"
+
       - name: List dist output (debug)
         run: ls -la dist/
 
@@ -53,6 +56,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
-
-      - name: Encrypt with StatiCrypt
-        run: npx staticrypt dist/index.html --short -d dist -p "${{ secrets.SITE_PASSWORD }}" 
